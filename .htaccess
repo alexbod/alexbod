@@ -1,0 +1,24 @@
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Redirect to https
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [R,L]
+
+# Force www
+RewriteCond %{HTTP_HOST} ^alexbod.com [NC]
+RewriteRule ^(.*)$ http://www.alexbod.com/$1 [L,R=301,NC]
+
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+#RewriteCond %{SERVER_NAME} =www.alexbod.com [OR]
+#RewriteCond %{SERVER_NAME} =alexbod.com
+#RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</IfModule>
+
+# END WordPress
